@@ -12,7 +12,9 @@ var leftIndex = null;
 var middleIndex = null;
 var rightIndex = null;
 
-//
+//Votes & Views
+var productVotes = 0;
+var votes = 10;
 
 // arrays
 Product.allImages = [];
@@ -62,33 +64,40 @@ function renderProduct(){
 
   console.log('left product',leftProduct);
   console.log('Left Index', leftIndex);
- 
+
   leftProduct.src = Product.allImages[leftIndex].file;
   middleProduct.src = Product.allImages[middleIndex].file;
   rightProduct.src = Product.allImages[rightIndex].file;
-    
+
 }
 
 // // Add Event Listener
 var handleClick = function(event) {
   var productClicked = event.target.id;
 
-  if(productClicked === 'left' || productClicked === 'middle' || productClicked === 'right'){
-    Product.allImages[leftIndex].clicked++;
+  if(productClicked !== productsParent){
+    votes++
+    console.log('votes', votes);
+    if(productClicked === 'left'){
+      Product.allImages[leftIndex].clicked++;
+    } else if(productClicked === 'middle'){
+      Product.allImages[middleIndex].clicked++;
+    }else if(productClicked === 'right'){
+      Product.allImages[rightIndex].clicked++;
+    }else{
+      alert('Please click on one of the images.');
+    }
   }
-
-
+  console.log(productClicked());
 }
-
-
 
 var bag = new Product('bag', '/img/bag.jpg');
 console.log(bag);
-var banana = new Product('banana', '/img/banana.jpg');
-var batroom = new Product('bathroom', '/img/bathroom.jpg');
-var boots = new Product('boots', '/img/boots.jpg');
-var breakfast = new Product('breakfast', '/img/breakfast.jpg');
-var bubblegum = new Product('bubblegum', '/img/bubblegum.jpg');
+new Product('banana', '/img/banana.jpg');
+new Product('bathroom', '/img/bathroom.jpg');
+new Product('boots', '/img/boots.jpg');
+new Product('breakfast', '/img/breakfast.jpg');
+new Product('bubblegum', '/img/bubblegum.jpg');
 // var chair = new Product('chari', '/img/chair.jpg');
 // var cthulhu = new Product('cthulu', '/img/cthulu.jpg');
 // var dogDuck = new Product('dogDuck', '/img/dog-duck.jpg');
