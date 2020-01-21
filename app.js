@@ -60,8 +60,9 @@ function setRandomIndexes(){
 // Render Images
 function renderProduct(){
 
-  console.log('left',leftProduct);
-  console.log('LIndex', leftIndex);
+  console.log('left product',leftProduct);
+  console.log('Left Index', leftIndex);
+ 
   leftProduct.src = Product.allImages[leftIndex].file;
   middleProduct.src = Product.allImages[middleIndex].file;
   rightProduct.src = Product.allImages[rightIndex].file;
@@ -69,6 +70,15 @@ function renderProduct(){
 }
 
 // // Add Event Listener
+var handleClick = function(event) {
+  var productClicked = event.target.id;
+
+  if(productClicked === 'left' || productClicked === 'middle' || productClicked === 'right'){
+    Product.allImages[leftIndex].clicked++;
+  }
+
+
+}
 
 
 

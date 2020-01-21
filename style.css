@@ -2,8 +2,34 @@ body {
   background-color: orange;
 }
 
-section img {
-  height: 350px;
-  width: 300px;
+h1 {
+  font-size: 4.8rem;
+  color: white;
+  text-align: center;
 }
 
+h3 {
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+section {
+  padding: 28%;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+section img {
+  height: 250px;
+  width: 250px;
+  position: relative;
+  margin: 2%;
+  /* margin-left: 14px; */
+  border: 2px solid slategray; 
+  border-radius: 50%;
+}
+
+section div {
+  width: 960px;
+  margin: auto;
+}
