@@ -1,3 +1,5 @@
+'use strict'
+
 
 // Global Variables
 var productsParent = document.getElementById('products');
@@ -5,10 +7,19 @@ var leftProduct = document.getElementById('left');
 var middleProduct = document.getElementById('middle');
 var rightProduct = document.getElementById('right');
 
+// Set global index for product array
+var leftIndex = null;
+var middleIndex = null;
+var rightIndex = null;
+
+//
 
 // arrays
 Product.allImages = [];
 
+
+
+// Constructor fucntion creating objects
 function Product(name, file) {
   this.name = name;
   this.file = file;
@@ -18,14 +29,46 @@ function Product(name, file) {
   Product.allImages.push(this);
 }
 
+// Generate Random Number
 function randomProduct() {
   var randomNumber = Math.floor(Math.random() * Product.allImages.length);
   return randomNumber;
 }
 
+function generateRandomIndex(){
+  var randomIndex = [null, null, null];
+  do{
+    for(var i = 0; i < randomIndex.length; i++){
+      randomIndex[i] = randomProduct();
+    }
+    console.log('random', randomIndex[0]);
+  }while(
+    randomIndex[0] === randomIndex[1] ||
+    randomIndex[1] === randomIndex[2] ||
+    randomIndex[0] === randomIndex[2])
+  return randomIndex;
+}
 
+//Place random indes into L/M/R index variables.
+function setRandomIndexes(){
+  var indexArray = generateRandomIndex();
+  leftIndex = indexArray[0];
+  middleIndex = indexArray[1];
+  rightIndex = indexArray[2];
+}
 
-// Add Event Listener
+// Render Images
+function renderProduct(){
+
+  console.log('left',leftProduct);
+  console.log('LIndex', leftIndex);
+  leftProduct.src = Product.allImages[leftIndex].file;
+  middleProduct.src = Product.allImages[middleIndex].file;
+  rightProduct.src = Product.allImages[rightIndex].file;
+    
+}
+
+// // Add Event Listener
 
 
 
@@ -52,4 +95,7 @@ var bubblegum = new Product('bubblegum', '/img/bubblegum.jpg');
 // var wineGlass = new Product('wineGlass', '/img/wine-glass.jpg');
 
 console.log(Product.allImages);
-console.log(randomProduct());
+console.log('generator', randomProduct());
+console.log(generateRandomIndex());
+console.log(setRandomIndexes());
+renderProduct();
