@@ -2,7 +2,7 @@
 
 
 // Global Variables
-var productsParent = document.getElementById('products');
+var productsParent = document.getElementById('productsParent');
 var leftProduct = document.getElementById('left');
 var middleProduct = document.getElementById('middle');
 var rightProduct = document.getElementById('right');
@@ -18,8 +18,6 @@ var votes = 10;
 
 // arrays
 Product.allImages = [];
-
-
 
 // Constructor fucntion creating objects
 function Product(name, file) {
@@ -62,59 +60,78 @@ function setRandomIndexes(){
 // Render Images
 function renderProduct(){
 
-  console.log('left product',leftProduct);
-  console.log('Left Index', leftIndex);
-
+  // console.log('left product',leftProduct);
+  // console.log('Left Index', leftIndex);
+  
   leftProduct.src = Product.allImages[leftIndex].file;
-  middleProduct.src = Product.allImages[middleIndex].file;
-  rightProduct.src = Product.allImages[rightIndex].file;
+  Product.allImages[leftIndex].views++;
 
+  middleProduct.src = Product.allImages[middleIndex].file;
+  Product.allImages[middleIndex].views++;
+
+  rightProduct.src = Product.allImages[rightIndex].file;
+  Product.allImages[rightIndex].views++;
 }
 
 // // Add Event Listener
 var handleClick = function(event) {
   var productClicked = event.target.id;
 
-  if(productClicked !== productsParent){
-    votes++
-    console.log('votes', votes);
+  if(productClicked !== productsParent.id){
+    productVotes++
+    // console.log('votes', votes);
     if(productClicked === 'left'){
-      Product.allImages[leftIndex].clicked++;
+      Product.allImages[leftIndex].clicks++;
     } else if(productClicked === 'middle'){
-      Product.allImages[middleIndex].clicked++;
+      Product.allImages[middleIndex].clicks++;
     }else if(productClicked === 'right'){
-      Product.allImages[rightIndex].clicked++;
+      Product.allImages[rightIndex].clicks++;
     }else{
       alert('Please click on one of the images.');
     }
   }
-  console.log(productClicked());
+  console.log('bag',Product.allImages[0]);
+  console.log('bathroom',Product.allImages[1]);
+  console.log('boots',Product.allImages[2]);
+  // console.log(productClicked);
+  setRandomIndexes();
+  renderProduct();
+  if (productVotes === votes){
+    productsParent.removeEventListener('click', handleClick);
+  }
 }
+// console.log(productsParent);
+productsParent.addEventListener('click', handleClick);
 
-var bag = new Product('bag', '/img/bag.jpg');
-console.log(bag);
+new Product('bag', '/img/bag.jpg');
+
 new Product('banana', '/img/banana.jpg');
 new Product('bathroom', '/img/bathroom.jpg');
 new Product('boots', '/img/boots.jpg');
 new Product('breakfast', '/img/breakfast.jpg');
 new Product('bubblegum', '/img/bubblegum.jpg');
-// var chair = new Product('chari', '/img/chair.jpg');
-// var cthulhu = new Product('cthulu', '/img/cthulu.jpg');
-// var dogDuck = new Product('dogDuck', '/img/dog-duck.jpg');
-// var dragon = new Product('dragon', '/img/dragon.jpg');
-// var pen = new Product('pen', '/img/pen.jpg');
-// var petSweep = new Product('petSweep', '/img/pet-sweep.jpg');
-// var scissors = new Product('scissors', '/img/scissors.jpg');
-// var shark = new Product('shark', '/img/shark.jpg');
-// var sweep = new Product('sweep', '/img/sweep.jpg');
-// var tauntaun = new Product('tauntaun', '/img/tauntaun.jpg');
-// var unicorn = new Product('unicorn', '/img/unicorn.jpg');
-// var usb = new Product('usb', '/img/usb.jpg');
-// var waterCan = new Product('waterCan', '/img/water-can.jpg');
-// var wineGlass = new Product('wineGlass', '/img/wine-glass.jpg');
+new Product('chari', '/img/chair.jpg');
+new Product('cthulu', '/img/cthulhu.jpg');
+new Product('dogDuck', '/img/dog-duck.jpg');
+new Product('dragon', '/img/dragon.jpg');
+new Product('pen', '/img/pen.jpg');
+new Product('petSweep', '/img/pet-sweep.jpg');
+new Product('scissors', '/img/scissors.jpg');
+new Product('shark', '/img/shark.jpg');
+new Product('sweep', '/img/sweep.png');
+new Product('tauntaun', '/img/tauntaun.jpg');
+new Product('unicorn', '/img/unicorn.jpg');
+new Product('usb', '/img/usb.gif');
+new Product('waterCan', '/img/water-can.jpg');
+new Product('wineGlass', '/img/wine-glass.jpg');
 
 console.log(Product.allImages);
 console.log('generator', randomProduct());
 console.log(generateRandomIndex());
 console.log(setRandomIndexes());
 renderProduct();
+console.log(generateRandomIndex());
+
+
+// console.log('shark', Product.shark);
+// console.log('usb', Product.usb);
