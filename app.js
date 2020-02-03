@@ -98,6 +98,10 @@ var handleClick = function(event) {
   renderProduct();
   if (productVotes === votes){
     productsParent.removeEventListener('click', handleClick);
+    alert('Thank you for your help. We will use your unput to make the best possible prodcuts.');
+    renderChart();
+    document.getElementById('chartArea').style.background = 'white';
+
   }
 }
 // console.log(productsParent);
@@ -135,3 +139,68 @@ console.log(generateRandomIndex());
 
 // console.log('shark', Product.shark);
 // console.log('usb', Product.usb);
+
+
+//render chart to track how many times an item is voted on
+function renderChart() {
+
+  var labelData = [];
+  var clickData = [];
+  var viewData = [];
+
+  for (var i = 0; i < Product.allImages.length; i++) {
+      labelData.push(Product.allImages[i].name);
+      clickData.push(Product.allImages[i].clicks);
+      viewData.push(Product.allImages[i].views);
+      console.log('chart', Product.allImages[i].name);
+  }
+  console.log('labelData', labelData);
+  console.log('clickData', clickData);
+  console.log('viewData', viewData);
+
+  var ctx = document.getElementById('voteChart').getContext('2d');
+  new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: labelData,
+          datasets: [{
+              label: '# of Clicks',
+              data: clickData,
+              backgroundColor: ['Red', 'Orange', 'Yellow', 'Green', 'Blue', 'Purple', 'Gray', 'Brown', 'Black', 'Pink', 'Red', 'Orange', 'Yellow', 'Green', 'Blue', 'Purple', 'Gray', 'Brown', 'Black', 'Pink'],
+          }, {
+              label: '# of Views',
+              data: viewData,
+              backgroundColor: ['rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)',
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)',
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)',
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)'],
+
+          }]
+      },
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero: true
+                  }
+              }]
+          }
+      }
+  });
+};
