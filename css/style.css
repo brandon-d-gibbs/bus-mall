@@ -1,7 +1,7 @@
 body {
   background-color: rgb(9, 116, 158);
   padding: 14px;
-  background-image: url("/img/bus-png-40042.png");
+  background-image: url("./img/bus-png-40042.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: 95% 2%; 

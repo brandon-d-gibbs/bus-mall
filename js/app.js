@@ -76,9 +76,17 @@ function renderProduct(){
 function setLocalStorage() {
   var arrayString = JSON.stringify(Product.allImages);
   localStorage.setItem('products', arrayString);
-  console.log('Tring to put stuff in local storage', arrayString);
+  console.log('Putting thins in local storage', arrayString);
 }
 
+function getLocalStorage() {
+  if (localStorage.length > 0) {
+    var storageData = localStorage.getItem('products');
+    console.log('Storage Data', storageData);
+    var imageData = JSON.parse(storageData);
+    console.log('Image Data', imageData);
+  }
+}
 
 
 // // Add Event Listener
@@ -104,6 +112,7 @@ var handleClick = function(event) {
   // console.log(productClicked);
   setRandomIndexes();
   setLocalStorage();
+  getLocalStorage();
   renderProduct();
   if (productVotes === votes){
     productsParent.removeEventListener('click', handleClick);
@@ -116,7 +125,7 @@ var handleClick = function(event) {
 // console.log(productsParent);
 productsParent.addEventListener('click', handleClick);
 
-new Product('bag', '/img/bag.jpg');
+new Product('bag', './img/bag.jpg');
 
 new Product('banana', './img/banana.jpg');
 new Product('bathroom', './img/bathroom.jpg');
